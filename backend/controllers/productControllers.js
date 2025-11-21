@@ -16,7 +16,7 @@ const getAllProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({
       success: false,
       message: "Could not find any products matching the ID",
@@ -25,11 +25,15 @@ const getProduct = async (req, res) => {
 
   try {
     const prdct = await Product.findById(id);
-    res
-      .status(200)
-      .json({ success: true, message: `Found Product: ${prdct.data}` });
+    if (!prdct) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    res.status(200).json({ success: true, data: prdct });
   } catch (error) {
-    console.error();
+    console.error(`Error fetching product: ${error.message}`);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
@@ -42,12 +46,18 @@ const newProduct = async (req, res) => {
       message: "Please fill empty product parameters",
     });
   }
+
+  // Set defaults for stock and available if not provided
+  if (product.stock === undefined) product.stock = 0;
+  if (product.available === undefined) product.available = true;
+
   const newProduct = new Product(product);
   try {
     await newProduct.save();
     res.status(201).json({
       success: true,
       message: `Your ${newProduct.name} has been created!`,
+      data: newProduct,
     });
   } catch (error) {
     console.error(`There was an error creating the product:  ${error.message}`);
