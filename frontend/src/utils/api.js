@@ -110,3 +110,46 @@ export const getAnalytics = async (token) => {
   });
   return response.json();
 };
+
+// Contact API calls
+export const submitInquiry = async (inquiryData) => {
+  const response = await fetch(`${API_URL}/contact`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inquiryData),
+  });
+  return response.json();
+};
+
+export const getAllInquiries = async (token) => {
+  const response = await fetch(`${API_URL}/contact`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+
+export const updateInquiryStatus = async (id, updateData, token) => {
+  const response = await fetch(`${API_URL}/contact/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(updateData),
+  });
+  return response.json();
+};
+
+export const deleteInquiry = async (id, token) => {
+  const response = await fetch(`${API_URL}/contact/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};

@@ -6,8 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
-import { Lock } from 'lucide-react'
 import { toast } from 'sonner'
+import logo from '@/assets/logo.svg'
 
 function AdminLogin() {
   const { login } = useAuth()
@@ -44,23 +44,23 @@ function AdminLogin() {
   }
 
   return (
-    <div className="container flex min-h-[calc(100vh-4rem)] items-center justify-center py-16">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-            <Lock className="h-8 w-8 text-primary" />
+    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="space-y-1 p-6 text-center sm:p-8">
+          <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 ring-4 ring-primary/20 sm:mb-4 sm:h-20 sm:w-20">
+            <img src={logo} alt="North West Meats" className="h-10 w-10 sm:h-12 sm:w-12" />
           </div>
-          <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl font-bold sm:text-2xl">Admin Login</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
             Enter your credentials to access the admin dashboard
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label
                 htmlFor="username"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sm:text-sm"
               >
                 Username
               </label>
@@ -71,12 +71,13 @@ function AdminLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                className="text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
               <label
                 htmlFor="password"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sm:text-sm"
               >
                 Password
               </label>
@@ -87,9 +88,10 @@ function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="text-sm sm:text-base"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full text-sm sm:text-base" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner className="mr-2" />

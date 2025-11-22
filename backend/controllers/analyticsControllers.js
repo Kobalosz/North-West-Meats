@@ -28,6 +28,13 @@ const getAnalytics = async (req, res) => {
       { $sort: { totalSales: -1 } },
     ]);
 
+    // Calculate total products sold (sum of all quantities)
+    const totalProducts = productAnalytics.reduce((sum, product) => sum + product.totalSales, 0);
+
+    // Calculate average order value
+    const revenue = totalRevenue[0]?.total || 0;
+    const averageOrderValue = totalOrders > 0 ? revenue / totalOrders : 0;
+
     const recentOrders = await Order.find({})
       .sort({ createdAt: -1 })
       .limit(10)
@@ -36,8 +43,12 @@ const getAnalytics = async (req, res) => {
     res.status(200).json({
       success: true,
       data: {
-        totalOrders,
-        totalRevenue: totalRevenue[0]?.total || 0,
+        overview: {
+          totalOrders,
+          totalRevenue: revenue,
+          averageOrderValue,
+          totalProducts,
+        },
         productAnalytics,
         recentOrders,
       },

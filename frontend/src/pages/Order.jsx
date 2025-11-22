@@ -76,22 +76,22 @@ function Order() {
 
   if (success) {
     return (
-      <div className="container flex min-h-[600px] items-center justify-center py-16">
+      <div className="container mx-auto flex min-h-[600px] items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="text-center">
           <div className="mb-6 flex justify-center">
-            <div className="rounded-full bg-green-100 p-6 dark:bg-green-950">
-              <ShoppingBag className="h-20 w-20 text-green-600 dark:text-green-400" />
+            <div className="rounded-full bg-green-100 p-4 dark:bg-green-950 sm:p-6">
+              <ShoppingBag className="h-16 w-16 text-green-600 dark:text-green-400 sm:h-20 sm:w-20" />
             </div>
           </div>
-          <h2 className="mb-4 text-3xl font-bold">Order Placed Successfully!</h2>
-          <p className="mb-4 text-muted-foreground">
+          <h2 className="mb-4 text-2xl font-bold sm:text-3xl">Order Placed Successfully!</h2>
+          <p className="mb-4 text-sm text-muted-foreground sm:text-base">
             Thank you for your order. We've sent a confirmation email to{' '}
             <strong>{customerEmail}</strong>
           </p>
-          <p className="mb-6 text-muted-foreground">
+          <p className="mb-6 text-sm text-muted-foreground sm:text-base">
             You will be notified when your order is ready for pickup.
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground sm:text-sm">
             Redirecting to home page...
           </p>
         </div>
@@ -100,8 +100,8 @@ function Order() {
   }
 
   return (
-    <div className="container py-8">
-      <h1 className="mb-8 text-3xl font-bold">Your Order</h1>
+    <div className="container mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <h1 className="mb-6 text-2xl font-bold sm:mb-8 sm:text-3xl">Your Order</h1>
 
       {cartItems.length === 0 ? (
         <div className="flex min-h-[500px] items-center justify-center">
@@ -115,73 +115,78 @@ function Order() {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <Card>
-              <CardHeader>
-                <CardTitle>Cart Items</CardTitle>
-                <CardDescription>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl">Cart Items</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   {cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 p-4 sm:space-y-4 sm:p-6">
                 {cartItems.map((item) => (
                   <div
                     key={item._id}
-                    className="flex items-center gap-4 rounded-lg border p-4"
+                    className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4"
                   >
                     <img
                       src={item.img}
                       alt={item.name}
-                      className="h-20 w-20 rounded object-cover"
+                      className="h-16 w-16 rounded object-cover sm:h-20 sm:w-20"
                       onError={(e) => {
                         e.target.src = 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=80&h=80&fit=crop'
                       }}
                     />
                     <div className="flex-1">
-                      <h3 className="font-semibold">{item.name}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="text-sm font-semibold sm:text-base">{item.name}</h3>
+                      <p className="text-xs text-muted-foreground sm:text-sm">
                         ${item.price.toFixed(2)} each
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between gap-2 sm:justify-start">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="icon-sm"
+                          variant="outline"
+                          onClick={() =>
+                            handleQuantityChange(item._id, item.quantity - 1)
+                          }
+                          disabled={item.quantity <= 1}
+                          className="h-8 w-8"
+                        >
+                          <Minus className="h-3 w-3" />
+                        </Button>
+                        <span className="w-10 text-center text-sm font-medium sm:w-12">
+                          {item.quantity}
+                        </span>
+                        <Button
+                          size="icon-sm"
+                          variant="outline"
+                          onClick={() =>
+                            handleQuantityChange(item._id, item.quantity + 1)
+                          }
+                          disabled={item.quantity >= item.stock}
+                          className="h-8 w-8"
+                        >
+                          <Plus className="h-3 w-3" />
+                        </Button>
+                      </div>
+                      <div className="text-right sm:ml-4">
+                        <p className="text-sm font-bold sm:text-base">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </p>
+                      </div>
                       <Button
-                        size="icon-sm"
-                        variant="outline"
-                        onClick={() =>
-                          handleQuantityChange(item._id, item.quantity - 1)
-                        }
-                        disabled={item.quantity <= 1}
+                        size="icon"
+                        variant="destructive"
+                        onClick={() => handleRemoveItem(item._id, item.name)}
+                        className="h-8 w-8 sm:h-10 sm:w-10 sm:ml-2"
                       >
-                        <Minus />
-                      </Button>
-                      <span className="w-12 text-center font-medium">
-                        {item.quantity}
-                      </span>
-                      <Button
-                        size="icon-sm"
-                        variant="outline"
-                        onClick={() =>
-                          handleQuantityChange(item._id, item.quantity + 1)
-                        }
-                        disabled={item.quantity >= item.stock}
-                      >
-                        <Plus />
+                        <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
                     </div>
-                    <div className="text-right">
-                      <p className="font-bold">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </p>
-                    </div>
-                    <Button
-                      size="icon"
-                      variant="destructive"
-                      onClick={() => handleRemoveItem(item._id, item.name)}
-                    >
-                      <Trash2 />
-                    </Button>
                   </div>
                 ))}
               </CardContent>
@@ -191,18 +196,18 @@ function Order() {
           {/* Checkout Form */}
           <div>
             <Card>
-              <CardHeader>
-                <CardTitle>Checkout</CardTitle>
-                <CardDescription>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl">Checkout</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   Enter your details to place your order
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleSubmitOrder}>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 p-4 sm:p-6">
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sm:text-sm"
                     >
                       Full Name
                     </label>
@@ -212,12 +217,13 @@ function Order() {
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
                   <div className="space-y-2">
                     <label
                       htmlFor="email"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 sm:text-sm"
                     >
                       Email Address
                     </label>
@@ -228,25 +234,26 @@ function Order() {
                       value={customerEmail}
                       onChange={(e) => setCustomerEmail(e.target.value)}
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
 
-                  <div className="space-y-4 border-t pt-4">
-                    <div className="flex justify-between text-lg font-bold">
+                  <div className="space-y-3 border-t pt-4 sm:space-y-4">
+                    <div className="flex justify-between text-base font-bold sm:text-lg">
                       <span>Total:</span>
                       <span>${getCartTotal().toFixed(2)}</span>
                     </div>
 
-                    <Badge className="w-full justify-center py-2" variant="secondary">
+                    <Badge className="w-full justify-center py-2 text-xs sm:text-sm" variant="secondary">
                       Payment collected in-store at pickup
                     </Badge>
                   </div>
                 </CardContent>
 
-                <CardFooter>
+                <CardFooter className="p-4 sm:p-6">
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full text-sm sm:text-base"
                     disabled={loading || cartItems.length === 0}
                   >
                     {loading ? (

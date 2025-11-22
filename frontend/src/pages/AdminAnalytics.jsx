@@ -104,22 +104,22 @@ function AdminAnalytics() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
-        <p className="text-muted-foreground">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold sm:text-3xl">Analytics Dashboard</h1>
+        <p className="text-xs text-muted-foreground sm:text-sm">
           Track your sales performance and product popularity
         </p>
       </div>
 
       {/* Overview Stats */}
-      <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-6 grid gap-4 sm:mb-8 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between p-4 pb-2 sm:p-6 sm:pb-2">
+            <CardTitle className="text-xs font-medium sm:text-sm">Total Revenue</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
+          <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-xl font-bold sm:text-2xl">
               ${overview.totalRevenue.toFixed(2)}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -129,12 +129,12 @@ function AdminAnalytics() {
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between p-4 pb-2 sm:p-6 sm:pb-2">
+            <CardTitle className="text-xs font-medium sm:text-sm">Total Orders</CardTitle>
             <ShoppingCart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{overview.totalOrders}</div>
+          <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-xl font-bold sm:text-2xl">{overview.totalOrders}</div>
             <p className="text-xs text-muted-foreground">
               All time order count
             </p>
@@ -142,12 +142,12 @@ function AdminAnalytics() {
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Average Order</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between p-4 pb-2 sm:p-6 sm:pb-2">
+            <CardTitle className="text-xs font-medium sm:text-sm">Average Order</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
+          <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-xl font-bold sm:text-2xl">
               ${overview.averageOrderValue.toFixed(2)}
             </div>
             <p className="text-xs text-muted-foreground">Per order average</p>
@@ -155,28 +155,28 @@ function AdminAnalytics() {
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Products Sold</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between p-4 pb-2 sm:p-6 sm:pb-2">
+            <CardTitle className="text-xs font-medium sm:text-sm">Products Sold</CardTitle>
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{overview.totalProducts}</div>
+          <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-xl font-bold sm:text-2xl">{overview.totalProducts}</div>
             <p className="text-xs text-muted-foreground">Total units sold</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Product Analytics */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Chart Card */}
         <Card>
-          <CardHeader>
-            <CardTitle>Product Performance Chart</CardTitle>
-            <CardDescription>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-lg sm:text-xl">Product Performance Chart</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
               Visual representation of sales by product
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6">
             {productAnalytics.length === 0 ? (
               <div className="flex min-h-[300px] items-center justify-center">
                 <Empty
@@ -196,7 +196,7 @@ function AdminAnalytics() {
                     color: "hsl(var(--chart-2))",
                   },
                 }}
-                className="h-[400px] w-full"
+                className="h-[300px] w-full sm:h-[400px]"
               >
                 <BarChart
                   data={productAnalytics.map((product) => ({
@@ -207,7 +207,7 @@ function AdminAnalytics() {
                     sales: product.totalSales,
                     revenue: product.totalRevenue,
                   }))}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                  margin={{ top: 20, right: 10, left: 10, bottom: 60 }}
                 >
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis
@@ -215,9 +215,9 @@ function AdminAnalytics() {
                     angle={-45}
                     textAnchor="end"
                     height={100}
-                    className="text-xs"
+                    className="text-[10px] sm:text-xs"
                   />
-                  <YAxis className="text-xs" />
+                  <YAxis className="text-[10px] sm:text-xs" />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Bar
                     dataKey="sales"
@@ -232,13 +232,13 @@ function AdminAnalytics() {
 
         {/* Detailed List Card */}
         <Card>
-          <CardHeader>
-            <CardTitle>Detailed Product Performance</CardTitle>
-            <CardDescription>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-lg sm:text-xl">Detailed Product Performance</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
               Sales breakdown by product (sorted by total sales)
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6">
             {productAnalytics.length === 0 ? (
               <div className="flex min-h-[200px] items-center justify-center">
                 <Empty
@@ -247,29 +247,29 @@ function AdminAnalytics() {
                 />
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {productAnalytics.map((product, index) => (
                   <div
                     key={product.productId}
-                    className="flex items-center justify-between rounded-lg border p-4"
+                    className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between sm:p-4"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-bold text-primary">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary sm:h-10 sm:w-10">
                         #{index + 1}
                       </div>
                       <div>
-                        <h3 className="font-semibold">{product.productName}</h3>
-                        <p className="text-sm text-muted-foreground">
+                        <h3 className="text-sm font-semibold sm:text-base">{product.productName}</h3>
+                        <p className="text-xs text-muted-foreground sm:text-sm">
                           {product.orderFrequency} order
                           {product.orderFrequency !== 1 ? "s" : ""}
                         </p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg font-bold">
+                    <div className="ml-11 text-left sm:ml-0 sm:text-right">
+                      <p className="text-base font-bold sm:text-lg">
                         {product.totalSales} units
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground sm:text-sm">
                         ${product.totalRevenue.toFixed(2)} revenue
                       </p>
                     </div>

@@ -3,9 +3,11 @@ import Navbar from '@/components/Navbar'
 import AdminLayout from '@/components/AdminLayout'
 import Home from '@/pages/Home'
 import Order from '@/pages/Order'
+import Contact from '@/pages/Contact'
 import AdminLogin from '@/pages/AdminLogin'
 import AdminProducts from '@/pages/AdminProducts'
 import AdminOrders from '@/pages/AdminOrders'
+import AdminInquiries from '@/pages/AdminInquiries'
 import AdminAnalytics from '@/pages/AdminAnalytics'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -19,6 +21,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Admin Login */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -29,6 +32,7 @@ function App() {
               <Route path="dashboard" element={<Navigate to="/admin/products" replace />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="orders" element={<AdminOrders />} />
+              <Route path="inquiries" element={<AdminInquiries />} />
               <Route path="analytics" element={<AdminAnalytics />} />
             </Route>
           </Routes>

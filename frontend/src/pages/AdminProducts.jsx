@@ -183,14 +183,14 @@ function AdminProducts() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Product Management</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl font-bold sm:text-3xl">Product Management</h1>
+          <p className="text-xs text-muted-foreground sm:text-sm">
             Manage your product inventory and availability
           </p>
         </div>
-        <Button onClick={() => handleOpenSheet()}>
+        <Button onClick={() => handleOpenSheet()} className="w-full text-sm sm:w-auto sm:text-base">
           <Plus className="mr-2 h-4 w-4" />
           Add Product
         </Button>
@@ -209,53 +209,53 @@ function AdminProducts() {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <Card key={product._id}>
-              <CardHeader>
+              <CardHeader className="p-4 sm:p-6">
                 <img
                   src={product.img}
                   alt={product.name}
-                  className="mb-4 h-48 w-full rounded-md object-cover"
+                  className="mb-3 h-40 w-full rounded-md object-cover sm:mb-4 sm:h-48"
                   onError={(e) => {
                     e.target.src =
                       'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop'
                   }}
                 />
                 <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="line-clamp-1">{product.name}</CardTitle>
-                  <Badge variant={product.available ? 'success' : 'destructive'}>
+                  <CardTitle className="line-clamp-1 text-base sm:text-lg">{product.name}</CardTitle>
+                  <Badge variant={product.available ? 'success' : 'destructive'} className="text-xs">
                     {product.available ? 'Available' : 'Unavailable'}
                   </Badge>
                 </div>
-                <CardDescription className="line-clamp-2">
+                <CardDescription className="line-clamp-2 text-xs sm:text-sm">
                   {product.desc || 'No description'}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between text-sm">
+              <CardContent className="space-y-3 p-4 sm:space-y-4 sm:p-6">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Price:</span>
                   <span className="font-semibold">${product.price.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Stock:</span>
                   <span className="font-semibold">{product.stock} units</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Button
                     variant="outline"
-                    className="flex-1"
+                    className="flex-1 text-sm"
                     onClick={() => handleOpenSheet(product)}
                   >
-                    <Pencil className="mr-2 h-4 w-4" />
+                    <Pencil className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
                     Edit
                   </Button>
                   <Button
                     variant="destructive"
-                    className="flex-1"
+                    className="flex-1 text-sm"
                     onClick={() => handleDeleteClick(product)}
                   >
-                    <Trash2 className="mr-2 h-4 w-4" />
+                    <Trash2 className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
                     Delete
                   </Button>
                 </div>
@@ -269,9 +269,9 @@ function AdminProducts() {
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent className="overflow-y-auto sm:max-w-lg">
           <form onSubmit={handleSubmit}>
-            <SheetHeader>
-              <SheetTitle>{editingProduct ? 'Edit Product' : 'Add New Product'}</SheetTitle>
-              <SheetDescription>
+            <SheetHeader className="pb-4">
+              <SheetTitle className="text-lg sm:text-xl">{editingProduct ? 'Edit Product' : 'Add New Product'}</SheetTitle>
+              <SheetDescription className="text-xs sm:text-sm">
                 {editingProduct
                   ? 'Update the product details below'
                   : 'Fill in the details to create a new product'}
@@ -280,7 +280,7 @@ function AdminProducts() {
 
             <div className="space-y-4 py-4">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium">
+                <label htmlFor="name" className="text-xs font-medium sm:text-sm">
                   Product Name *
                 </label>
                 <Input
@@ -294,7 +294,7 @@ function AdminProducts() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="price" className="text-sm font-medium">
+                <label htmlFor="price" className="text-xs font-medium sm:text-sm">
                   Price ($) *
                 </label>
                 <Input
@@ -307,11 +307,12 @@ function AdminProducts() {
                   value={formData.price}
                   onChange={handleInputChange}
                   required
+                  className="text-sm sm:text-base"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="stock" className="text-sm font-medium">
+                <label htmlFor="stock" className="text-xs font-medium sm:text-sm">
                   Stock Quantity *
                 </label>
                 <Input
@@ -323,11 +324,12 @@ function AdminProducts() {
                   value={formData.stock}
                   onChange={handleInputChange}
                   required
+                  className="text-sm sm:text-base"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="img" className="text-sm font-medium">
+                <label htmlFor="img" className="text-xs font-medium sm:text-sm">
                   Image URL *
                 </label>
                 <Input
@@ -338,11 +340,12 @@ function AdminProducts() {
                   value={formData.img}
                   onChange={handleInputChange}
                   required
+                  className="text-sm sm:text-base"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="desc" className="text-sm font-medium">
+                <label htmlFor="desc" className="text-xs font-medium sm:text-sm">
                   Description
                 </label>
                 <Textarea
@@ -352,6 +355,7 @@ function AdminProducts() {
                   value={formData.desc}
                   onChange={handleInputChange}
                   rows={3}
+                  className="text-sm sm:text-base"
                 />
               </div>
 
@@ -364,17 +368,17 @@ function AdminProducts() {
                   onChange={handleInputChange}
                   className="h-4 w-4 rounded border-gray-300"
                 />
-                <label htmlFor="available" className="text-sm font-medium">
+                <label htmlFor="available" className="text-xs font-medium sm:text-sm">
                   Available for purchase
                 </label>
               </div>
             </div>
 
-            <SheetFooter>
-              <Button type="button" variant="outline" onClick={handleCloseSheet}>
+            <SheetFooter className="flex-col gap-2 sm:flex-row">
+              <Button type="button" variant="outline" onClick={handleCloseSheet} className="w-full text-sm sm:w-auto sm:text-base">
                 Cancel
               </Button>
-              <Button type="submit" disabled={submitting}>
+              <Button type="submit" disabled={submitting} className="w-full text-sm sm:w-auto sm:text-base">
                 {submitting ? (
                   <>
                     <Spinner className="mr-2" />
