@@ -7,6 +7,8 @@ import orderRouter from "./routes/orderRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
 import analyticsRouter from "./routes/analyticsRoutes.js";
 import contactRouter from "./routes/contactRoutes.js";
+import carouselRouter from "./routes/carouselRoutes.js";
+import marqueeRouter from "./routes/marqueeRoutes.js";
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ app.use("/api/orders", orderRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/analytics", analyticsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/carousel", carouselRouter);
+app.use("/api/marquee", marqueeRouter);
 
 app.listen(port, () => {
   connectDB();

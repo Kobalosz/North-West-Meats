@@ -9,6 +9,8 @@ import AdminProducts from '@/pages/AdminProducts'
 import AdminOrders from '@/pages/AdminOrders'
 import AdminInquiries from '@/pages/AdminInquiries'
 import AdminAnalytics from '@/pages/AdminAnalytics'
+import AdminCarousel from '@/pages/AdminCarousel'
+import AdminMarquee from '@/pages/AdminMarquee'
 import { Toaster } from '@/components/ui/sonner'
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
               <Route path="orders" element={<AdminOrders />} />
               <Route path="inquiries" element={<AdminInquiries />} />
               <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="carousel" element={<AdminCarousel />} />
+              <Route path="marquee" element={<AdminMarquee />} />
             </Route>
           </Routes>
         </main>

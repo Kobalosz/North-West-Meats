@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import Product from "./models/product.js";
 import Order from "./models/order.js";
 import Contact from "./models/Contact.js";
+import Carousel from "./models/Carousel.js";
+import Marquee from "./models/Marquee.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -99,6 +101,8 @@ const seedDatabase = async () => {
     await Product.deleteMany({});
     await Order.deleteMany({});
     await Contact.deleteMany({});
+    await Carousel.deleteMany({});
+    await Marquee.deleteMany({});
     console.log("🗑️  Cleared existing data");
 
     // Insert products
@@ -257,10 +261,65 @@ const seedDatabase = async () => {
     const createdInquiries = await Contact.insertMany(sampleInquiries);
     console.log(`✅ Created ${createdInquiries.length} contact inquiries`);
 
+    // Create sample carousel slides
+    const sampleCarouselSlides = [
+      {
+        title: "Premium Quality Meats",
+        description: "Discover our selection of fresh, locally sourced meats delivered with care",
+        image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=1200&h=500&fit=crop",
+        link: "",
+        order: 1,
+        active: true,
+      },
+      {
+        title: "Fresh Daily Selections",
+        description: "Hand-picked cuts prepared fresh every morning for your family",
+        image: "https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=1200&h=500&fit=crop",
+        link: "",
+        order: 2,
+        active: true,
+      },
+      {
+        title: "Farm to Table Excellence",
+        description: "Supporting local farmers and bringing you the finest quality",
+        image: "https://images.unsplash.com/photo-1588347818036-fde7487f7e13?w=1200&h=500&fit=crop",
+        link: "",
+        order: 3,
+        active: true,
+      },
+    ];
+
+    const createdCarouselSlides = await Carousel.insertMany(sampleCarouselSlides);
+    console.log(`✅ Created ${createdCarouselSlides.length} carousel slides`);
+
+    // Create sample marquee items
+    const sampleMarqueeItems = [
+      {
+        text: "Free pickup available for all orders over $50",
+        order: 1,
+        active: true,
+      },
+      {
+        text: "New! Fresh seafood now available every Thursday and Friday",
+        order: 2,
+        active: true,
+      },
+      {
+        text: "Family packs on sale this week - Save up to 20%",
+        order: 3,
+        active: true,
+      },
+    ];
+
+    const createdMarqueeItems = await Marquee.insertMany(sampleMarqueeItems);
+    console.log(`✅ Created ${createdMarqueeItems.length} marquee items`);
+
     console.log("\n🎉 Database seeded successfully!");
     console.log(`📦 Total Products: ${createdProducts.length}`);
     console.log(`📋 Total Orders: ${sampleOrders.length}`);
     console.log(`📧 Total Inquiries: ${createdInquiries.length}`);
+    console.log(`🎠 Total Carousel Slides: ${createdCarouselSlides.length}`);
+    console.log(`📢 Total Marquee Items: ${createdMarqueeItems.length}`);
     console.log(`💰 Total Revenue: $${sampleOrders.reduce((sum, order) => sum + order.totalAmount, 0).toFixed(2)}`);
 
   } catch (error) {

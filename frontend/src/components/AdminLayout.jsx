@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Navigate, Link, useLocation, Outlet } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '@/components/ui/button'
-import { Package, ShoppingBag, BarChart3, MessageSquare, LogOut, Menu, X } from 'lucide-react'
+import { Package, ShoppingBag, BarChart3, MessageSquare, LogOut, Menu, X, Image, Type } from 'lucide-react'
 import { toast } from 'sonner'
 import logo from '@/assets/logo.svg'
 
@@ -44,6 +44,16 @@ function AdminLayout() {
       name: 'Analytics',
       path: '/admin/analytics',
       icon: BarChart3,
+    },
+    {
+      name: 'Carousel',
+      path: '/admin/carousel',
+      icon: Image,
+    },
+    {
+      name: 'Marquee',
+      path: '/admin/marquee',
+      icon: Type,
     },
   ]
 

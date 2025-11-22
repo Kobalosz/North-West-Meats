@@ -153,3 +153,101 @@ export const deleteInquiry = async (id, token) => {
   });
   return response.json();
 };
+
+// Carousel API calls
+export const getActiveCarouselSlides = async () => {
+  const response = await fetch(`${API_URL}/carousel/active`);
+  return response.json();
+};
+
+export const getAllCarouselSlides = async (token) => {
+  const response = await fetch(`${API_URL}/carousel`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+
+export const createCarouselSlide = async (slideData, token) => {
+  const response = await fetch(`${API_URL}/carousel`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(slideData),
+  });
+  return response.json();
+};
+
+export const updateCarouselSlide = async (id, slideData, token) => {
+  const response = await fetch(`${API_URL}/carousel/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(slideData),
+  });
+  return response.json();
+};
+
+export const deleteCarouselSlide = async (id, token) => {
+  const response = await fetch(`${API_URL}/carousel/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+
+// Marquee API calls
+export const getActiveMarqueeItems = async () => {
+  const response = await fetch(`${API_URL}/marquee/active`);
+  return response.json();
+};
+
+export const getAllMarqueeItems = async (token) => {
+  const response = await fetch(`${API_URL}/marquee`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+
+export const createMarqueeItem = async (itemData, token) => {
+  const response = await fetch(`${API_URL}/marquee`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(itemData),
+  });
+  return response.json();
+};
+
+export const updateMarqueeItem = async (id, itemData, token) => {
+  const response = await fetch(`${API_URL}/marquee/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(itemData),
+  });
+  return response.json();
+};
+
+export const deleteMarqueeItem = async (id, token) => {
+  const response = await fetch(`${API_URL}/marquee/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
