@@ -198,11 +198,12 @@
 
   /* Hover lift effect */
   .hover-lift {
-    @apply transition-smooth;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hover-lift:hover {
-    @apply -translate-y-0.5 shadow-lg;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 
   /* Gradient backgrounds */
@@ -216,7 +217,14 @@
 
   /* Glass morphism effect */
   .glass {
-    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+    background-color: oklch(0.985 0.005 60 / 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid oklch(0.90 0.01 60 / 0.5);
+  }
+
+  .dark .glass {
+    background-color: oklch(0.15 0.01 30 / 0.8);
+    border: 1px solid oklch(0.30 0.015 30 / 0.5);
   }
 
   /* Subtle shadows */
@@ -232,13 +240,16 @@
 
   /* Text gradients */
   .text-gradient {
-    @apply bg-clip-text text-transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     background-image: linear-gradient(135deg, oklch(0.48 0.18 20) 0%, oklch(0.55 0.20 15) 100%);
   }
 
   /* Focus visible styles */
-  .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  .focus-visible-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
   }
 }
 

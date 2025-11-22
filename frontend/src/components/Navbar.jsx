@@ -25,11 +25,11 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b glass shadow-soft">
-      <div className="container mx-auto flex h-14 items-center justify-between gap-2 px-4 sm:h-16 sm:gap-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex h-20 items-center justify-between gap-2 px-4 sm:h-28 sm:gap-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 transition-smooth-fast hover:scale-105 sm:gap-3">
-          <img src={logo} alt="North West Meats Logo" className="h-8 w-8 sm:h-10 sm:w-10 drop-shadow-sm" />
-          <h1 className="hidden text-base font-bold text-gradient sm:block sm:text-xl">
+        <Link to="/" className="flex items-center gap-3 transition-smooth-fast hover:scale-105 sm:gap-4">
+          <img src={logo} alt="North West Meats Logo" className="h-20 w-20 sm:h-24 sm:w-24 drop-shadow-lg" />
+          <h1 className="hidden text-xl font-bold text-gradient sm:block sm:text-3xl">
             North West Meats
           </h1>
         </Link>
