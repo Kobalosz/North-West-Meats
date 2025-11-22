@@ -24,12 +24,12 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b glass shadow-soft">
       <div className="container mx-auto flex h-14 items-center justify-between gap-2 px-4 sm:h-16 sm:gap-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80 sm:gap-3">
-          <img src={logo} alt="North West Meats Logo" className="h-8 w-8 sm:h-10 sm:w-10" />
-          <h1 className="hidden text-base font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent sm:block sm:text-xl">
+        <Link to="/" className="flex items-center gap-2 transition-smooth-fast hover:scale-105 sm:gap-3">
+          <img src={logo} alt="North West Meats Logo" className="h-8 w-8 sm:h-10 sm:w-10 drop-shadow-sm" />
+          <h1 className="hidden text-base font-bold text-gradient sm:block sm:text-xl">
             North West Meats
           </h1>
         </Link>
@@ -84,14 +84,14 @@ function Navbar() {
           </NavigationMenu>
 
           {/* Dark Mode Toggle */}
-          <div className="flex items-center gap-1.5 rounded-lg border bg-muted/50 px-2 py-1 sm:gap-2 sm:px-3 sm:py-1.5">
-            <Sun className="h-3.5 w-3.5 text-muted-foreground sm:h-4 sm:w-4" />
+          <div className="flex items-center gap-1.5 rounded-lg border bg-muted/50 px-2 py-1 shadow-sm transition-smooth-fast hover:bg-muted/70 sm:gap-2 sm:px-3 sm:py-1.5">
+            <Sun className="h-3.5 w-3.5 text-muted-foreground transition-smooth-fast sm:h-4 sm:w-4" />
             <Switch
               checked={theme === "dark"}
               onCheckedChange={toggleTheme}
               aria-label="Toggle dark mode"
             />
-            <Moon className="h-3.5 w-3.5 text-muted-foreground sm:h-4 sm:w-4" />
+            <Moon className="h-3.5 w-3.5 text-muted-foreground transition-smooth-fast sm:h-4 sm:w-4" />
           </div>
         </div>
       </div>

@@ -34,29 +34,27 @@ function Home() {
   return (
     <div className="container mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       {/* Hero Section */}
-      <div className="mb-8 rounded-xl bg-linear-to-br from-primary/10 via-primary/5 to-transparent p-6 text-center sm:mb-12 sm:rounded-2xl sm:p-8 md:p-12">
+      <div className="mb-8 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 text-center shadow-soft animate-fade-in-up sm:mb-12 sm:rounded-3xl sm:p-8 md:p-12 lg:p-16">
         <div className="mx-auto max-w-3xl space-y-3 sm:space-y-4">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            <span className="bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            <span className="text-gradient">
               Premium Quality
             </span>
             <br />
-            Meats & More
+            <span className="text-foreground">Meats & More</span>
           </h1>
           <p className="mx-auto max-w-2xl text-sm text-muted-foreground sm:text-base md:text-lg">
             Browse our selection of fresh, high-quality meats sourced from trusted local farms.
             Place your order online and pick it up at our store.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs text-muted-foreground sm:text-sm">
-            <span className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs font-medium text-primary/80 sm:gap-3 sm:text-sm">
+            <span className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 transition-smooth-fast hover:bg-primary/15">
               ✓ Fresh Daily
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 transition-smooth-fast hover:bg-primary/15">
               ✓ Locally Sourced
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 transition-smooth-fast hover:bg-primary/15">
               ✓ Quality Guaranteed
             </span>
           </div>
